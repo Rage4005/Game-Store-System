@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sofia+Sans:wght@300;400;600;700&family=Epilogue:wght@300;400&family=Karantina:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Arsenal - Your Ultimate Gaming Destination</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="main-header">
+        <div class="logo">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <div class="logo-text">
+              <h1>Arsenal</h1>
+              <span class="logo-tagline">Your Ultimate Gaming Destination</span>
+            </div>
+          </div>
+        </div>
+        <nav class="main-nav">
+          <a href="#" class="nav-link nav-link--active">Home</a>
+          <a href="#" class="nav-link">Games</a>
+          <a href="#" class="nav-link">Deals</a>
+          <a href="#" class="nav-link">Support</a>
+          <a href="registration/login.html" class="nav-link nav-link--coming-soon">Login</a>
+        </nav>
+        <div class="header-actions">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" class="search-input" placeholder="Search games...">
+          </div>
+          <div class="user-actions">
+            <button class="icon-button" title="Wishlist">
+              <i class="fas fa-heart"></i>
+            </button>
+            <button class="icon-button" title="Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+            <a href="registration/login.html" class="logout-button">
+              <i class="fas fa-sign-out-alt"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-slider">
+          <div class="hero-slide active">
+            <div class="hero-content">
+              <h1 class="hero-title">Marvel's Spider-Man 2</h1>
+              <p class="hero-description">
+                Peter Parker and Miles Morales return for an exciting new adventure
+                in Marvel's Spider-Man 2!
+              </p>
+              <button class="cta-button">Pre-order Now</button>
+            </div>
+            <div class="hero-background" style="background-image: url('spd 2.jpeg')"></div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-content">
+              <h1 class="hero-title">Cyberpunk 2077</h1>
+              <p class="hero-description">
+                Enter the futuristic world of Night City in this groundbreaking RPG
+                where your choices shape the story.
+              </p>
+              <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="hero-background" style="background-image: url('cyberpunk.jpg')"></div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-content">
+              <h1 class="hero-title">Elden Ring</h1>
+              <p class="hero-description">
+                Journey through the vast lands of the Lands Between in this epic
+                action RPG from FromSoftware.
+              </p>
+              <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="hero-background" style="background-image: url('Elden ring.jpeg')"></div>
+          </div>
+
+          <div class="hero-slide">
+            <div class="hero-content">
+              <h1 class="hero-title">Ghost of Tsushima</h1>
+              <p class="hero-description">
+                Experience the beauty and brutality of feudal Japan in this
+                stunning open-world adventure.
+              </p>
+              <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="hero-background" style="background-image: url('Ghost of thushima.png')"></div>
+          </div>
+        </div>
+        <div class="slider-dots">
+          <button class="dot active" aria-label="Go to slide 1"></button>
+          <button class="dot" aria-label="Go to slide 2"></button>
+          <button class="dot" aria-label="Go to slide 3"></button>
+          <button class="dot" aria-label="Go to slide 4"></button>
+        </div>
+      </section>
+
+      <main class="main-content">
+        <section class="newest-listings">
+          <div class="section-header">
+            <h2 class="section-title">Newest physical listings</h2>
+            <button class="show-all-button">Show all</button>
+          </div>
+
+          <div class="category-grid">
+            <div class="category-card">
+              <i class="fas fa-gamepad"></i>
+              <span>Consoles</span>
+              <span class="item-count">(202 items)</span>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-laptop"></i>
+              <span>PC & Mobile</span>
+              <span class="item-count">(202 items)</span>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-box"></i>
+              <span>Bundles</span>
+              <span class="item-count">(202 items)</span>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-gamepad"></i>
+              <span>Games</span>
+              <span class="item-count">(202 items)</span>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-headphones"></i>
+              <span>Accessories</span>
+              <span class="item-count">(202 items)</span>
+            </div>
+          </div>
+
+          <div class="platform-bar">
+            <!-- Platform logos from the design -->
+            <div class="platform-item">
+              <svg
+                class="platform-logo"
+                width="90"
+                height="30"
+                viewBox="0 0 90 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <!-- SVG paths from design -->
+              </svg>
+              <span class="item-count">(202 items)</span>
+            </div>
+            <!-- Repeat for other platforms -->
+          </div>
+
+          <div class="product-grid">
+            <article class="product-card">
+              <div class="product-image-wrapper">
+                <img
+                  src="remnant2.jpg"
+                  alt="Remnant 2 - Ultimate Edition"
+                  class="product-image"
+                />
+                <div class="discount-badge">10%</div>
+                <button class="wishlist-button" title="Add to Wishlist">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <h3 class="product-title">Remnant 2 - Ultimate Edition</h3>
+              </div>
+              <div class="product-actions">
+                <button class="platform-button" title="Steam">
+                  <i class="fas fa-steam"></i>
+                </button>
+                <button class="platform-button" title="PlayStation">
+                  <i class="fas fa-playstation"></i>
+                </button>
+                <button class="add-to-cart-button">Add To Cart</button>
+                <div class="price-tag">
+                  <span class="current-price">52$</span>
+                  <span class="original-price">11$</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image-wrapper">
+                <img
+                  src="spd 2.jpeg"
+                  alt="Marvel's Spider-Man 2"
+                  class="product-image"
+                />
+                <div class="discount-badge">15%</div>
+                <button class="wishlist-button" title="Add to Wishlist">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <h3 class="product-title">Marvel's Spider-Man 2</h3>
+              </div>
+              <div class="product-actions">
+                <button class="platform-button" title="PlayStation">
+                  <i class="fas fa-playstation"></i>
+                </button>
+                <button class="add-to-cart-button">Add To Cart</button>
+                <div class="price-tag">
+                  <span class="current-price">69$</span>
+                  <span class="original-price">79$</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image-wrapper">
+                <img
+                  src="baldursgate3.jpg"
+                  alt="Baldur's Gate 3"
+                  class="product-image"
+                />
+                <div class="discount-badge">20%</div>
+                <button class="wishlist-button" title="Add to Wishlist">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <h3 class="product-title">Baldur's Gate 3</h3>
+              </div>
+              <div class="product-actions">
+                <button class="platform-button" title="Steam">
+                  <i class="fas fa-steam"></i>
+                </button>
+                <button class="platform-button" title="PlayStation">
+                  <i class="fas fa-playstation"></i>
+                </button>
+                <button class="add-to-cart-button">Add To Cart</button>
+                <div class="price-tag">
+                  <span class="current-price">59$</span>
+                  <span class="original-price">69$</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image-wrapper">
+                <img
+                  src="starfield.jpg"
+                  alt="Starfield"
+                  class="product-image"
+                />
+                <div class="discount-badge">25%</div>
+                <button class="wishlist-button" title="Add to Wishlist">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <h3 class="product-title">Starfield</h3>
+              </div>
+              <div class="product-actions">
+                <button class="platform-button" title="Steam">
+                  <i class="fas fa-steam"></i>
+                </button>
+                <button class="platform-button" title="Xbox">
+                  <i class="fas fa-xbox"></i>
+                </button>
+                <button class="add-to-cart-button">Add To Cart</button>
+                <div class="price-tag">
+                  <span class="current-price">49$</span>
+                  <span class="original-price">69$</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="main-footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-title">Service-Hotline</h3>
+            <p>Telefonische Beratung unter:</p>
+            <p>+49 (0) 771 / 175 131 69</p>
+            <p>
+              <span>Montag - Freitag:</span><br />
+              <span>08:00 - 12.00 Uhr</span><br />
+              <span>13.00 - 17:00 Uhr</span>
+            </p>
+          </div>
+
+          <div class="footer-section">
+            <h3 class="footer-title">Shop</h3>
+            <nav class="footer-nav">
+              <a href="#">Games</a>
+              <a href="#">Hardware</a>
+              <a href="#">Merchandise</a>
+              <a href="#">Exclusives</a>
+              <a href="#">Online service</a>
+            </nav>
+          </div>
+
+          <div class="footer-section">
+            <h3 class="footer-title">Informationen</h3>
+            <nav class="footer-nav">
+              <a href="#">Download area</a>
+              <a href="#">Imprint</a>
+              <a href="#">Data protection</a>
+              <a href="#">Newsletter</a>
+              <a href="#">Shipment</a>
+            </nav>
+          </div>
+
+          <div class="footer-section">
+            <h3 class="footer-title">Our Company</h3>
+            <nav class="footer-nav">
+              <a href="#">About Us</a>
+              <a href="#">Contact</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Use</a>
+            </nav>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fas fa-twitter"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fas fa-facebook"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fas fa-instagram"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fas fa-youtube"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fas fa-discord"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          slides.forEach(slide => slide.classList.remove('active'));
+          dots.forEach(dot => dot.classList.remove('active'));
+          
+          slides[index].classList.add('active');
+          dots[index].classList.add('active');
+        }
+
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slides.length;
+          showSlide(currentSlide);
+        }
+
+        // Add click events to dots
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+          });
+        });
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+      });
+    </script>
+  </body>
+</html>
+
+ 

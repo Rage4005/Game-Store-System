@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sofia+Sans:wght@300;400;600;700&family=Epilogue:wght@300;400&family=Karantina:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="games.css" />
+    <title>Arsenal - Games Catalog</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="main-header">
+        <div class="logo">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <div class="logo-text">
+              <h1>Arsenal</h1>
+              <span class="logo-tagline">Your Ultimate Gaming Destination</span>
+            </div>
+          </div>
+        </div>
+        <nav class="main-nav">
+          <a href="Home.html" class="nav-link">Home</a>
+          <a href="games.html" class="nav-link nav-link--active">Games</a>
+          <a href="#" class="nav-link">Deals</a>
+          <a href="#" class="nav-link">Support</a>
+          <a href="registration/login.html" class="nav-link nav-link--coming-soon">Login</a>
+        </nav>
+        <div class="header-actions">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" class="search-input" placeholder="Search games...">
+          </div>
+          <div class="user-actions">
+            <button class="icon-button" title="Wishlist">
+              <i class="fas fa-heart"></i>
+            </button>
+            <button class="icon-button" title="Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+            <a href="registration/login.html" class="logout-button">
+              <i class="fas fa-sign-out-alt"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main class="games-catalog">
+        <div class="filters">
+          <div class="filter-group">
+            <h3>Categories</h3>
+            <label><input type="checkbox" value="action"> Action</label>
+            <label><input type="checkbox" value="rpg"> RPG</label>
+            <label><input type="checkbox" value="strategy"> Strategy</label>
+            <label><input type="checkbox" value="sports"> Sports</label>
+          </div>
+          <div class="filter-group">
+            <h3>Price Range</h3>
+            <input type="range" min="0" max="100" value="60" class="price-slider">
+            <span class="price-value">$60</span>
+          </div>
+        </div>
+
+        <div class="games-grid">
+          <article class="game-card">
+            <div class="game-image">
+              <img src="spd 2.jpeg" alt="Marvel's Spider-Man 2">
+              <div class="game-overlay">
+                <button class="add-to-cart">Add to Cart</button>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3>Marvel's Spider-Man 2</h3>
+              <div class="game-meta">
+                <span class="game-genre">Action, Adventure</span>
+                <span class="game-price">$69.99</span>
+              </div>
+              <div class="game-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(4.5)</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-image">
+              <img src="cyberpunk.jpg" alt="Cyberpunk 2077">
+              <div class="game-overlay">
+                <button class="add-to-cart">Add to Cart</button>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3>Cyberpunk 2077</h3>
+              <div class="game-meta">
+                <span class="game-genre">RPG, Action</span>
+                <span class="game-price">$59.99</span>
+              </div>
+              <div class="game-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(4.0)</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-image">
+              <img src="Elden ring.jpeg" alt="Elden Ring">
+              <div class="game-overlay">
+                <button class="add-to-cart">Add to Cart</button>
+              </div>
+            </div>
+            <div class="game-info">
+              <h3>Elden Ring</h3>
+              <div class="game-meta">
+                <span class="game-genre">Action RPG</span>
+                <span class="game-price">$59.99</span>
+              </div>
+              <div class="game-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(5.0)</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <footer class="main-footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>About Arsenal</h3>
+            <p>Your ultimate destination for gaming entertainment.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Connect With Us</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Arsenal. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form | Arsenal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="video-container">
+    <video autoplay loop muted playsinline class="background-video">
+      <source src="../assets/vid.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="particles"></div>
+  <div class="wrapper">
+    <h1 class="arsenal-title">Arsenal</h1>
+    <span class="tagline">Your Ultimate Gaming Destination</span>
+    <form action="" id="registerForm">
+      <div class="input-box">
+        <input type="text" placeholder="Username" required minlength="3">
+        <i class='bx bxs-user'></i>
+      </div>
+      <div class="input-box">
+        <input type="email" placeholder="Email" required>
+        <i class='bx bxs-envelope'></i>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Password" required minlength="6" id="password">
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Confirm Password" required minlength="6" id="confirmPassword">
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+      <div class="terms">
+        <label><input type="checkbox" required> I agree to the terms & conditions</label>
+      </div>
+      <button type="submit" class="btn">Register</button>
+      <div class="register-link">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+      <div class="login-footer">
+        <a href="../Home.html" class="back-to-home">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+    </form>
+  </div>
+  <script src="particles.js"></script>
+  <script>
+    const form = document.getElementById('registerForm');
+    const inputs = form.querySelectorAll('input[required]');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+        const box = input.parentElement;
+        if (input.type === 'password' && input.id === 'confirmPassword') {
+          if (input.value === password.value && input.value.length >= input.minLength) {
+            box.classList.remove('error');
+            box.classList.add('success');
+          } else {
+            box.classList.remove('success');
+            box.classList.add('error');
+          }
+        } else if (input.validity.valid && input.value.length >= (input.minLength || 0)) {
+          box.classList.remove('error');
+          box.classList.add('success');
+        } else {
+          box.classList.remove('success');
+          box.classList.add('error');
+        }
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+      
+      inputs.forEach(input => {
+        if (!input.validity.valid || 
+            (input.type === 'password' && input.id === 'confirmPassword' && input.value !== password.value)) {
+          isValid = false;
+          input.parentElement.classList.add('error');
+        }
+      });
+
+      if (isValid) {
+        // Add success animation to button
+        const btn = form.querySelector('.btn');
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 200);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -30,8 +30,7 @@
           <a href="Home.html" class="nav-link">Home</a>
           <a href="games.html" class="nav-link nav-link--active">Games</a>
           <a href="#" class="nav-link">Deals</a>
-          <a href="#" class="nav-link">Support</a>
-          <a href="registration/login.html" class="nav-link nav-link--coming-soon">Login</a>
+          <a href="coming-soon/coming-soon.html" class="nav-link nav-link--coming-soon">Coming Soon <span class="soon-tag">New!</span></a>
         </nav>
         <div class="header-actions">
           <div class="search-bar">
@@ -45,10 +44,9 @@
             <button class="icon-button" title="Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
             </button>
-            <a href="registration/login.html" class="logout-button">
-              <i class="fas fa-sign-out-alt"></i>
-              Logout
-            </a>
+            <button class="icon-button" title="Coming Soon">
+              <i class="fas fa-gamepad"></i>
+            </button>
           </div>
         </div>
       </header>
@@ -64,7 +62,8 @@
           </div>
           <div class="filter-group">
             <h3>Price Range</h3>
-            <input type="range" min="0" max="100" value="60" class="price-slider">
+            <label for="price-slider">Adjust Price Range</label>
+            <input type="range" id="price-slider" min="0" max="100" value="60" class="price-slider" title="Adjust the price range">
             <span class="price-value">$60</span>
           </div>
         </div>
@@ -72,7 +71,7 @@
         <div class="games-grid">
           <article class="game-card">
             <div class="game-image">
-              <img src="spd 2.jpeg" alt="Marvel's Spider-Man 2">
+              <img src="assets/spd 2.jpeg" alt="Marvel's Spider-Man 2">
               <div class="game-overlay">
                 <button class="add-to-cart">Add to Cart</button>
               </div>
@@ -96,7 +95,7 @@
 
           <article class="game-card">
             <div class="game-image">
-              <img src="cyberpunk.jpg" alt="Cyberpunk 2077">
+              <img src="assets/Cyberpunk.jpg" alt="Cyberpunk 2077">
               <div class="game-overlay">
                 <button class="add-to-cart">Add to Cart</button>
               </div>
@@ -120,7 +119,7 @@
 
           <article class="game-card">
             <div class="game-image">
-              <img src="Elden ring.jpeg" alt="Elden Ring">
+              <img src="assets/Elden ring.jpeg" alt="Elden Ring">
               <div class="game-overlay">
                 <button class="add-to-cart">Add to Cart</button>
               </div>

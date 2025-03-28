@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Arsenal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sofia+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="coming-soon.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="logo">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Arsenal</h1>
+                        <span class="logo-tagline">Your Ultimate Gaming Destination</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../Home.html" class="nav-link">Home</a>
+                <a href="../games.html" class="nav-link">Games</a>
+                <a href="#" class="nav-link">Deals</a>
+                <a href="#" class="nav-link nav-link--active nav-link--coming-soon">Coming Soon <span class="soon-tag">New!</span></a>
+            </nav>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Search games...">
+                </div>
+                <div class="user-actions">
+                    <button class="icon-button" title="Wishlist">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="icon-button" title="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <a href="../registration/login.html" class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content coming-soon-content">
+            <section class="coming-soon-hero">
+                <h1>Upcoming Releases</h1>
+                <p>Get ready for these amazing titles coming to Arsenal</p>
+            </section>
+
+            <section class="coming-soon-grid">
+                <article class="coming-soon-card">
+                    <div class="coming-soon-image">
+                        <img src="../assets/tekken8.jpg" alt="Tekken 8">
+                        <div class="release-date">March 2025</div>
+                    </div>
+                    <div class="coming-soon-details">
+                        <h3>Tekken 8</h3>
+                        <p>The next evolution in fighting games. Experience the most ambitious Tekken yet.</p>
+                        <div class="price-tag">$59.99</div>
+                        <button class="notify-btn">Notify Me</button>
+                    </div>
+                </article>
+
+                <article class="coming-soon-card">
+                    <div class="coming-soon-image">
+                        <img src="../assets/gta6.jpg" alt="GTA VI">
+                        <div class="release-date">Late 2025</div>
+                    </div>
+                    <div class="coming-soon-details">
+                        <h3>Grand Theft Auto VI</h3>
+                        <p>Return to Vice City in the most anticipated game of the decade.</p>
+                        <div class="price-tag">$69.99</div>
+                        <button class="notify-btn">Notify Me</button>
+                    </div>
+                </article>
+
+                <article class="coming-soon-card">
+                    <div class="coming-soon-image">
+                        <img src="../assets/ff7r2.jpg" alt="Final Fantasy VII Rebirth">
+                        <div class="release-date">April 2025</div>
+                    </div>
+                    <div class="coming-soon-details">
+                        <h3>Final Fantasy VII Rebirth</h3>
+                        <p>Continue Cloud's journey in this breathtaking sequel.</p>
+                        <div class="price-tag">$69.99</div>
+                        <button class="notify-btn">Notify Me</button>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Arsenal. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Add notification functionality
+        const notifyButtons = document.querySelectorAll('.notify-btn');
+        notifyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const currentText = button.textContent;
+                button.textContent = 'Notification Set!';
+                button.classList.add('notified');
+                button.disabled = true;
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    button.textContent = currentText;
+                    button.classList.remove('notified');
+                    button.disabled = false;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

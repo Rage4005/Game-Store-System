@@ -3,21 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form | Dan Aleko</title>
+  <title>Login Form | Arsenal</title>
   <link rel="stylesheet" href="styles.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="video-container">
+    <video autoplay loop muted class="background-video">
+      <source src="../assets/vid.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="particles"></div>
   <div class="wrapper">
-    <form action="">
-      <h1>Login</h1>
+    <h1 class="arsenal-title">Arsenal</h1>
+    <span class="tagline">Your Ultimate Gaming Destination</span>
+    <form action="" id="loginForm">
       <div class="input-box">
-        <input type="text" placeholder="Username" required>
+        <input type="text" placeholder="Username" required minlength="3">
         <i class='bx bxs-user'></i>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Password" required>
-        <i class='bx bxs-lock-alt' ></i>
+        <input type="password" placeholder="Password" required minlength="6">
+        <i class='bx bxs-lock-alt'></i>
       </div>
       <div class="remember-forgot">
         <label><input type="checkbox">Remember Me</label>
@@ -25,18 +33,53 @@
       </div>
       <button type="submit" class="btn">Login</button>
       <div class="register-link">
-        <p>Dont have an account? <a href="#">Register</a></p>
+        <p>Don't have an account? <a href="register.html">Register</a></p>
+      </div>
+      <div class="login-footer">
+        <a href="../Home.html" class="back-to-home">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
       </div>
     </form>
+  </div>
+  <script src="particles.js"></script>
+  <script>
+    // Add playsinline attribute dynamically for compatibility
+    document.querySelector('.background-video').setAttribute('playsinline', '');
+  </script>
+  <script>
+    const form = document.getElementById('loginForm');
+    const inputs = form.querySelectorAll('input[required]');
 
-                <div class="login-footer">
-                    <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
-                    <a href="../Home.html" class="back-to-home">
-                        <i class="fas fa-arrow-left"></i> Back to Home
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+        const box = input.parentElement;
+        if (input.validity.valid && input.value.length >= input.minLength) {
+          box.classList.remove('error');
+          box.classList.add('success');
+        } else {
+          box.classList.remove('success');
+          box.classList.add('error');
+        }
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+      inputs.forEach(input => {
+        if (!input.validity.valid) {
+          isValid = false;
+          input.parentElement.classList.add('error');
+        }
+      });
+      if (isValid) {
+        // Add success animation to button
+        const btn = form.querySelector('.btn');
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 200);
+      }
+    });
+  </script>
 </body>
 </html>

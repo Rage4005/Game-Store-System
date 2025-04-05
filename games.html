@@ -11,6 +11,43 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="games.css" />
     <title>Arsenal - Games Catalog</title>
+    <style>
+      .game-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .game-image {
+        position: relative;
+      }
+
+      .game-image:hover .game-overlay {
+        opacity: 1;
+      }
+
+      .add-to-cart {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .add-to-cart:hover {
+        background: #c0392b;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -29,7 +66,7 @@
         <nav class="main-nav">
           <a href="Home.html" class="nav-link">Home</a>
           <a href="games.html" class="nav-link nav-link--active">Games</a>
-          <a href="#" class="nav-link">Deals</a>
+          <a href="wishlist.html" class="nav-link">Wishlist</a>
           <a href="coming-soon/coming-soon.html" class="nav-link nav-link--coming-soon">Coming Soon <span class="soon-tag">New!</span></a>
         </nav>
         <div class="header-actions">
@@ -41,9 +78,9 @@
             <button class="icon-button" title="Wishlist">
               <i class="fas fa-heart"></i>
             </button>
-            <button class="icon-button" title="Shopping Cart">
+            <a href="cart.html" class="icon-button" title="Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
-            </button>
+            </a>
             <button class="icon-button" title="Coming Soon">
               <i class="fas fa-gamepad"></i>
             </button>
@@ -73,7 +110,7 @@
             <div class="game-image">
               <img src="assets/spd 2.jpeg" alt="Marvel's Spider-Man 2">
               <div class="game-overlay">
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Marvel\'s Spider-Man 2', 69.99, 'assets/spd 2.jpeg')">Add to Cart</button>
               </div>
             </div>
             <div class="game-info">
@@ -97,7 +134,7 @@
             <div class="game-image">
               <img src="assets/Cyberpunk.jpg" alt="Cyberpunk 2077">
               <div class="game-overlay">
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Cyberpunk 2077', 59.99, 'assets/Cyberpunk.jpg')">Add to Cart</button>
               </div>
             </div>
             <div class="game-info">
@@ -121,7 +158,7 @@
             <div class="game-image">
               <img src="assets/Elden ring.jpeg" alt="Elden Ring">
               <div class="game-overlay">
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Elden Ring', 59.99, 'assets/Elden ring.jpeg')">Add to Cart</button>
               </div>
             </div>
             <div class="game-info">
@@ -173,5 +210,76 @@
         </div>
       </footer>
     </div>
+    <script>
+      function addToCart(title, price, image) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({
+          title: title,
+          price: price,
+          image: image
+        });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Game added to cart!');
+      }
+
+      // Wishlist functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        function addToWishlist(id, title, price, image) {
+          let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+          if (!wishlist.find(item => item.id === id)) {
+            wishlist.push({ id, title, price, image });
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            // Update wishlist button state
+            const wishlistButton = document.querySelector(`[data-id="${id}"]`);
+            if (wishlistButton) {
+              wishlistButton.classList.add('active');
+            }
+          }
+        }
+
+        function removeFromWishlist(id) {
+          let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+          wishlist = wishlist.filter(item => item.id !== id);
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          // Update wishlist button state
+          const wishlistButton = document.querySelector(`[data-id="${id}"]`);
+          if (wishlistButton) {
+            wishlistButton.classList.remove('active');
+          }
+        }
+
+        // Add wishlist buttons to game cards
+        document.querySelectorAll('.game-card').forEach(card => {
+          const title = card.querySelector('h3').textContent;
+          const price = card.querySelector('.game-price').textContent.replace('$', '');
+          const image = card.querySelector('img').src;
+          const id = title.toLowerCase().replace(/\s+/g, '-');
+          const gameImage = card.querySelector('.game-image');
+
+          // Add wishlist button
+          const wishlistButton = document.createElement('button');
+          wishlistButton.className = 'wishlist-button';
+          wishlistButton.setAttribute('data-id', id);
+          wishlistButton.innerHTML = '<i class="fas fa-heart"></i>';
+          
+          // Check if item is in wishlist
+          const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+          if (wishlist.find(item => item.id === id)) {
+            wishlistButton.classList.add('active');
+          }
+
+          wishlistButton.addEventListener('click', function() {
+            if (this.classList.contains('active')) {
+              removeFromWishlist(id);
+            } else {
+              addToWishlist(id, title, price, image);
+            }
+            this.classList.toggle('active');
+          });
+
+          gameImage.appendChild(wishlistButton);
+        });
+      });
+    </script>
   </body>
 </html>

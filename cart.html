@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sofia+Sans:wght@300;400;600;700&family=Epilogue:wght@300;400&family=Karantina:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Arsenal - Shopping Cart</title>
+    <style>
+        /* Cart Styles */
+        .cart-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .cart-title {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 1rem;
+        }
+
+        .cart-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 2rem;
+            align-items: center;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .cart-item-details h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .cart-item-price {
+            font-size: 1.2rem;
+            color: #e74c3c;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .remove-item {
+            background: transparent;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .remove-item:hover {
+            color: #c0392b;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.5rem;
+            color: #7f8c8d;
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Cart Summary Styles */
+        .cart-summary {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .summary-details {
+            display: grid;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .summary-details p {
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+            padding: 0.5rem 0;
+            color: #ecf0f1;
+        }
+
+        .total {
+            font-size: 1.4rem;
+            color: #fff;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            margin-top: 1rem;
+            padding-top: 1rem;
+        }
+
+        .proceed-button {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .proceed-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            animation: modalSlideIn 0.4s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .close-button {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            color: #95a5a6;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .close-button:hover {
+            color: #fff;
+            background: rgba(231, 76, 60, 0.2);
+        }
+
+        /* Payment Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: #95a5a6;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .payment-button {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .payment-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+        }
+
+        /* Receipt Styles */
+        .receipt {
+            background: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .receipt-header p {
+            margin: 0.5rem 0;
+            color: #ecf0f1;
+            font-size: 1.1rem;
+        }
+
+        .receipt-header p:first-child {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .receipt-items {
+            margin: 2rem 0;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ecf0f1;
+            font-size: 1.1rem;
+        }
+
+        .receipt-summary {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .receipt-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            color: #ecf0f1;
+            font-size: 1.1rem;
+        }
+
+        .receipt-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .receipt-footer p {
+            color: #e74c3c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .cart-item-image {
+                margin: 0 auto;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="logo">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Arsenal</h1>
+                        <span class="logo-tagline">Your Ultimate Gaming Destination</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="Home.html" class="nav-link">Home</a>
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="wishlist.html" class="nav-link">Wishlist</a>
+                <a href="coming-soon/coming-soon.html" class="nav-link nav-link--coming-soon">Coming Soon <span class="soon-tag">New!</span></a>
+            </nav>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Search games...">
+                </div>
+                <div class="user-actions">
+                    <button class="icon-button" title="Wishlist">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="icon-button" title="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="cart-container">
+            <h1 class="cart-title">Shopping Cart</h1>
+            <div class="cart-grid" id="cartGrid">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-summary" id="cartSummary">
+                <div class="summary-details">
+                    <p>Subtotal: <span id="subtotal">$0.00</span></p>
+                    <p>Tax (10%): <span id="tax">$0.00</span></p>
+                    <p class="total">Total: <span id="total">$0.00</span></p>
+                </div>
+                <button id="proceedToPayment" class="proceed-button" style="display: none;">Proceed to Payment</button>
+            </div>
+        </main>
+
+        <!-- Payment Modal -->
+        <div id="paymentModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Payment Details</h2>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+                    <button type="submit" class="payment-button">Pay Now</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Receipt Modal -->
+        <div id="receiptModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div class="receipt">
+                    <h2>Purchase Receipt</h2>
+                    <div class="receipt-header">
+                        <p>Arsenal Game Store</p>
+                        <p>Order Date: <span id="orderDate"></span></p>
+                        <p>Buyer: Rage</p>
+                        <p>Order ID: <span id="orderId"></span></p>
+                    </div>
+                    <div class="receipt-items" id="receiptItems">
+                        <!-- Receipt items will be added here -->
+                    </div>
+                    <div class="receipt-summary">
+                        <p>Subtotal: <span id="receiptSubtotal"></span></p>
+                        <p>Tax (10%): <span id="receiptTax"></span></p>
+                        <p class="total">Total: <span id="receiptTotal"></span></p>
+                    </div>
+                    <div class="receipt-footer">
+                        <p>Thank you for shopping at Arsenal!</p>
+                        <button id="downloadReceipt" class="download-button">Download Receipt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Arsenal</h3>
+                    <p>Your ultimate destination for gaming entertainment.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Arsenal. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartGrid = document.getElementById('cartGrid');
+            const subtotalElement = document.getElementById('subtotal');
+            const taxElement = document.getElementById('tax');
+            const totalElement = document.getElementById('total');
+            const proceedButton = document.getElementById('proceedToPayment');
+            const paymentModal = document.getElementById('paymentModal');
+            const receiptModal = document.getElementById('receiptModal');
+            const paymentForm = document.getElementById('paymentForm');
+            const downloadReceiptBtn = document.getElementById('downloadReceipt');
+
+            function displayCartItems() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                if (cart.length === 0) {
+                    cartGrid.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+                    proceedButton.style.display = 'none';
+                    return;
+                }
+
+                let subtotal = 0;
+                cartGrid.innerHTML = cart.map(item => {
+                    subtotal += parseFloat(item.price);
+                    return `
+                        <article class="cart-item">
+                            <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h3>${item.title}</h3>
+                                <p class="cart-item-price">$${item.price}</p>
+                            </div>
+                            <button class="remove-item" onclick="removeFromCart('${item.title}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </article>
+                    `;
+                }).join('');
+
+                const tax = subtotal * 0.1;
+                const total = subtotal + tax;
+
+                subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+                taxElement.textContent = `$${tax.toFixed(2)}`;
+                totalElement.textContent = `$${total.toFixed(2)}`;
+                proceedButton.style.display = 'block';
+            }
+
+            function removeFromCart(title) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart = cart.filter(item => item.title !== title);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCartItems();
+            }
+
+            function generateOrderId() {
+                return 'ORD' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            }
+
+            function showPaymentModal() {
+                paymentModal.style.display = 'block';
+            }
+
+            function showReceiptModal() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const subtotal = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
+                const tax = subtotal * 0.1;
+                const total = subtotal + tax;
+                const orderId = generateOrderId();
+                const orderDate = new Date().toLocaleString();
+
+                document.getElementById('orderDate').textContent = orderDate;
+                document.getElementById('orderId').textContent = orderId;
+                document.getElementById('receiptItems').innerHTML = cart.map(item => `
+                    <div class="receipt-item">
+                        <span>${item.title}</span>
+                        <span>$${parseFloat(item.price).toFixed(2)}</span>
+                    </div>
+                `).join('');
+                document.getElementById('receiptSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('receiptTax').textContent = `$${tax.toFixed(2)}`;
+                document.getElementById('receiptTotal').textContent = `$${total.toFixed(2)}`;
+
+                paymentModal.style.display = 'none';
+                receiptModal.style.display = 'block';
+            }
+
+            function downloadReceipt() {
+                const receiptContent = document.querySelector('.receipt').innerText;
+                const blob = new Blob([receiptContent], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Arsenal_Receipt_${document.getElementById('orderId').textContent}.txt`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }
+
+            // Event Listeners
+            proceedButton.addEventListener('click', showPaymentModal);
+            downloadReceiptBtn.addEventListener('click', downloadReceipt);
+
+            document.querySelectorAll('.close-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showReceiptModal();
+                // Clear cart after successful payment
+                localStorage.setItem('cart', '[]');
+                displayCartItems();
+            });
+
+            // Format card number input
+            const cardNumberInput = document.getElementById('cardNumber');
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                e.target.value = formattedValue;
+            });
+
+            // Format expiry date input
+            const expiryInput = document.getElementById('expiryDate');
+            expiryInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substr(0, 2) + '/' + value.substr(2);
+                }
+                e.target.value = value;
+            });
+
+            // Initialize cart display
+            displayCartItems();
+        });
+    </script>
+</body>
+</html>

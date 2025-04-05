@@ -28,7 +28,7 @@
         <nav class="main-nav">
           <a href="Home.html" class="nav-link nav-link--active">Home</a>
           <a href="games.html" class="nav-link">Games</a>
-          <a href="#" class="nav-link">Deals</a>
+          <a href="wishlist.html" class="nav-link">Wishlist</a>
           <a href="coming-soon/coming-soon.html" class="nav-link nav-link--coming-soon">Coming Soon <span class="soon-tag">New!</span></a>
         </nav>
         <div class="header-actions">
@@ -348,7 +348,6 @@
         function showSlide(index) {
           slides.forEach(slide => slide.classList.remove('active'));
           dots.forEach(dot => dot.classList.remove('active'));
-          
           slides[index].classList.add('active');
           dots[index].classList.add('active');
         }
@@ -366,8 +365,67 @@
           });
         });
 
-        // Auto slide every 5 seconds
+        // Auto advance slides
         setInterval(nextSlide, 5000);
+
+        // Wishlist functionality
+        function addToWishlist(id, title, price, image) {
+          let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+          if (!wishlist.find(item => item.id === id)) {
+            wishlist.push({ id, title, price, image });
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            // Update wishlist button state
+            const wishlistButton = document.querySelector(`[data-id="${id}"]`);
+            if (wishlistButton) {
+              wishlistButton.classList.add('active');
+            }
+          }
+        }
+
+        function removeFromWishlist(id) {
+          let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+          wishlist = wishlist.filter(item => item.id !== id);
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          // Update wishlist button state
+          const wishlistButton = document.querySelector(`[data-id="${id}"]`);
+          if (wishlistButton) {
+            wishlistButton.classList.remove('active');
+          }
+        }
+
+        // Add wishlist buttons to product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+          const imageWrapper = card.querySelector('.product-image-wrapper');
+          const title = card.querySelector('.product-title').textContent;
+          const price = card.querySelector('.current-price').textContent.replace('$', '');
+          const image = card.querySelector('.product-image').src;
+          const id = title.toLowerCase().replace(/\s+/g, '-');
+
+          // Add wishlist button if it doesn't exist
+          if (!card.querySelector('.wishlist-button')) {
+            const wishlistButton = document.createElement('button');
+            wishlistButton.className = 'wishlist-button';
+            wishlistButton.setAttribute('data-id', id);
+            wishlistButton.innerHTML = '<i class="fas fa-heart"></i>';
+            
+            // Check if item is in wishlist
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (wishlist.find(item => item.id === id)) {
+              wishlistButton.classList.add('active');
+            }
+
+            wishlistButton.addEventListener('click', function() {
+              if (this.classList.contains('active')) {
+                removeFromWishlist(id);
+              } else {
+                addToWishlist(id, title, price, image);
+              }
+              this.classList.toggle('active');
+            });
+
+            imageWrapper.appendChild(wishlistButton);
+          }
+        });
       });
     </script>
   </body>

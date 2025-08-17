@@ -1,6 +1,12 @@
 # 🎮 Arsenal – Gaming Website
 
 Welcome to **Arsenal**, a dynamic and visually immersive gaming website designed to showcase the latest games, exclusive content, and a seamless user experience. Whether you're a casual gamer or a hardcore enthusiast, Arsenal brings you closer to the gaming universe with engaging layouts and interactive features.
+# 🎮 Game-Store-System
+> Your Ultimate Gaming Destination
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/775f8a5e-****-****-****-********/deploy-status)](https://chimerical-axolotl-775f8a.netlify.app)
+
+**🚀 Live Demo →** https://chimerical-axolotl-775f8a.netlify.app
 
 ---
 
